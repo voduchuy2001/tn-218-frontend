@@ -118,14 +118,14 @@ const Login = () => {
                     type="submit"
                     className="button mb-4 tablet:w-full mobile:w-full float-right btn-primary"
                   >
-                    Đăng ký
+                    Đăng Nhập
                   </button>
                 ) : (
                   <button
                     type="submit"
                     className="disabled button mb-4 tablet:w-full mobile:w-full float-right btn-disabled"
                   >
-                    Đăng ký
+                    Đăng Nhập
                   </button>
                 )}
               </div>
