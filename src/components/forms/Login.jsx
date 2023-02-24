@@ -1,30 +1,42 @@
-import { useFormik } from 'formik';
-import React from 'react'
-import { Link } from 'react-router-dom';
-import * as Yup from 'yup';
-
+import axios from "axios";
+import { useFormik } from "formik";
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import * as Yup from "yup";
 
 const Login = () => {
-
-
-    // validate
-    const formik = useFormik({
-      initialValues: {
-        "email" : "",
-        "password" : "",
-
-  
-      },
-      //Rules
-      validationSchema: Yup.object({
-        "email" : Yup.string().required("Vui lòng nhập email.")
+  const navigate=useNavigate()
+  // validate
+  const formik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    //Rules
+    validationSchema: Yup.object({
+      email: Yup.string()
+        .required("Vui lòng nhập email.")
         .matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Email không hợp lệ."),
-        "password" : Yup.string().required("Vui lòng nhập mật khẩu."),
-      }),
-      onSubmit: (value) => {
-        console.log(value);
-      }
-    });
+      password: Yup.string().required("Vui lòng nhập mật khẩu."),
+    }),
+    onSubmit: (value) => {
+      axios
+        .post("http://127.0.0.1:8000/api/auth/login/", {
+          email: value.email,
+          password: value.password,
+        })
+        .then((res) => {
+          console.log(res.data);
+          localStorage.setItem("access_token",res.data.access_token)
+          localStorage.setItem("user",res.data.user.name)
+          navigate("/")
+
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+    },
+  });
 
   return (
     <div className="py-[100px] mobile:px-[20px] min-h-screen bg-gradient-to-tr from-white to-blue-100">
@@ -34,7 +46,7 @@ const Login = () => {
             <img
               className="h-full w-full mobile:hidden"
               src="https://plus.unsplash.com/premium_photo-1670282654525-62fed9d7d4ba?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8Ymx1ZXxlbnwwfHwwfHw%3D&w=1000&q=80"
-              alt
+              alt="image"
             />
           </div>
           <div className="col l-8 md-12 c-12">
@@ -48,7 +60,10 @@ const Login = () => {
                 Đăng nhập
               </h2>
               <span>
-                Chưa có tài khoản?<Link className='ml-1 hover:underline' to="/register">Đăng ký</Link>
+                Chưa có tài khoản?
+                <Link className="ml-1 hover:underline" to="/register">
+                  Đăng ký
+                </Link>
               </span>
               <div className="form-group row m-[24px_0px]">
                 <label
@@ -60,12 +75,18 @@ const Login = () => {
                 <input
                   name="email"
                   placeholder="Vui lòng nhập email..."
-                  className={`focus-visible:outline-primary-color bg-blue-100 w-[280px] h-[32px] p-5 col l-8 md-12 c-12 ${formik.errors.email ? `border-red-500 border border-solid` : `border-green-500 border border-solid`}`}
+                  className={`focus-visible:outline-primary-color bg-blue-100 w-[280px] h-[32px] p-5 col l-8 md-12 c-12 ${
+                    formik.errors.email
+                      ? `border-red-500 border border-solid`
+                      : `border-green-500 border border-solid`
+                  }`}
                   type="email"
                   value={formik.values.email}
                   onChange={formik.handleChange}
                 />
-                <span className="error-message col l-o-4 text-red-600" >{formik.errors.email && formik.errors.email}</span>
+                <span className="error-message col l-o-4 text-red-600">
+                  {formik.errors.email && formik.errors.email}
+                </span>
               </div>
               <div className="form-group row m-[24px_0px]">
                 <label
@@ -77,30 +98,36 @@ const Login = () => {
                 <input
                   name="password"
                   placeholder="Vui lòng nhập mật khẩu..."
-                  className={`focus-visible:outline-primary-color bg-blue-100 w-[280px] h-[32px] p-5 col l-8 md-12 c-12 ${formik.errors.password ? `border-red-500 border border-solid` : `border-green-500 border border-solid`}`}
+                  className={`focus-visible:outline-primary-color bg-blue-100 w-[280px] h-[32px] p-5 col l-8 md-12 c-12 ${
+                    formik.errors.password
+                      ? `border-red-500 border border-solid`
+                      : `border-green-500 border border-solid`
+                  }`}
                   type="password"
                   value={formik.values.password}
                   onChange={formik.handleChange}
                 />
-                <span className="error-message col l-o-4 text-red-600" >{formik.errors.password && formik.errors.password}</span>
+                <span className="error-message col l-o-4 text-red-600">
+                  {formik.errors.password && formik.errors.password}
+                </span>
               </div>
               <div className="flex justify-end">
-               {/* Nếu form hợp lệ */}
-              {formik.isValid ? (
-                <button
-                type="submit"
-                className="button mb-4 tablet:w-full mobile:w-full float-right btn-primary"
-              >
-                Đăng ký
-              </button>
-              ) : (
-                <button
-                type="submit"
-                className="disabled button mb-4 tablet:w-full mobile:w-full float-right btn-disabled"
-              >
-                Đăng ký
-              </button>
-              )}
+                {/* Nếu form hợp lệ */}
+                {formik.isValid ? (
+                  <button
+                    type="submit"
+                    className="button mb-4 tablet:w-full mobile:w-full float-right btn-primary"
+                  >
+                    Đăng ký
+                  </button>
+                ) : (
+                  <button
+                    type="submit"
+                    className="disabled button mb-4 tablet:w-full mobile:w-full float-right btn-disabled"
+                  >
+                    Đăng ký
+                  </button>
+                )}
               </div>
               <div className="border-t-slate-200 border-solid border-t">
                 <p className="text-center">or</p>
@@ -129,6 +156,6 @@ const Login = () => {
       </div>
     </div>
   );
-}
+};
 
-export default Login
+export default Login;

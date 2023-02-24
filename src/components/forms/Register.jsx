@@ -1,9 +1,11 @@
 import React from 'react'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useFormik } from 'formik';
 import * as Yup from "yup";
+import axios from 'axios';
 
 const Register = () => {
+  const navigate=useNavigate()
   
   // validate
   const formik = useFormik({
@@ -24,7 +26,20 @@ const Register = () => {
       .oneOf([Yup.ref("password"), null], "Mật khẩu không trùng khớp."),
     }),
     onSubmit: (value) => {
-      console.log(value);
+      axios
+        .post("http://127.0.0.1:8000/api/auth/register/", {
+          name: value.fullname,
+          email: value.email,
+          password: value.password,
+          password_confirmation: value.confirmPassword
+        })
+        .then((res) => {
+          console.log(res.data);
+          navigate("/login")
+        })
+        .catch((error) => {
+          console.error(error);
+        });
     }
   });
 

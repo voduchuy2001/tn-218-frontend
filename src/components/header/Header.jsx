@@ -1,7 +1,30 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
+import axios from "axios";
+import React from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
+  const navigate=useNavigate()
+  const config = {
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+    },
+  };
+  const bodyParameters = {
+    key: "logout",
+  };
+
+  const handleLogout = () => {
+    axios
+      .post("http://127.0.0.1:8000/api/auth/logout", bodyParameters, config)
+      .then((res) => {
+        console.log(res);
+        localStorage.clear()
+        navigate("/login")
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <header>
       <div className="bg-primary-color">
@@ -58,18 +81,28 @@ const Header = () => {
               </a>
             </div>
             {/* Not signed*/}
-            <ul className="flex justify-between gap-2">
+            <ul
+              className={
+                localStorage.getItem("user")
+                  ? "hidden flex justify-between gap-2"
+                  : " flex justify-between gap-2"
+              }
+            >
               <li className>
                 <Link to="/login">Đăng nhập</Link>
               </li>
               <p>|</p>
               <li className>
-              <Link to="/register">Đăng ký</Link>
+                <Link to="/register">Đăng ký</Link>
               </li>
             </ul>
             {/* Signed in */}
-            <div className="hidden flex p-3">
-              <span>Xin chào, Quốc Trọng</span>
+            <div
+              className={
+                localStorage.getItem("user") ? " flex p-3" : "hidden flex p-3"
+              }
+            >
+              <span>Xin chào, {localStorage.getItem("user")}</span>
               <div className="relative group">
                 <img
                   src="https://via.placeholder.com/50"
@@ -89,7 +122,13 @@ const Header = () => {
                         Đổi mật khẩu
                       </li>
                     </a>
-                    <a className href>
+                    <a
+                      className
+                      onClick={() => {
+                        handleLogout();
+                      }}
+                      href="#"
+                    >
                       <li className="hover:text-primary-color  pt-2 border-t-2 border-t-primary-color border-solid">
                         Đăng xuất
                       </li>
@@ -156,11 +195,10 @@ const Header = () => {
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </header>
   );
-}
+};
 
-export default Header
+export default Header;
