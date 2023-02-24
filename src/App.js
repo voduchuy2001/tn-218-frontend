@@ -11,6 +11,7 @@ import UserLayout from './layouts/UserLayout';
 import Login from './components/forms/Login';
 import Register from './components/forms/Register';
 import ListProducts from './components/product/ListProducts';
+import ChangePassword from './components/forms/ChangePassword';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route index element={<Home />}/>
           <Route path='/login' element={<Login />}/>
           <Route path='/register' element={<Register />}/>
+          <Route path='/change-password' element={<ChangePassword />}/>
           <Route path='/products' element={<ListProducts />}/>
         </Route>
       </Routes>
