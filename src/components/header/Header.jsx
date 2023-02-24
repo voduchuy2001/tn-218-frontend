@@ -3,7 +3,7 @@ import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const Header = () => {
-  const navigate=useNavigate()
+  const navigate = useNavigate();
   const config = {
     headers: {
       Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -18,8 +18,8 @@ const Header = () => {
       .post("http://127.0.0.1:8000/api/auth/logout", bodyParameters, config)
       .then((res) => {
         console.log(res);
-        localStorage.clear()
-        navigate("/login")
+        localStorage.clear();
+        navigate("/login");
       })
       .catch((err) => {
         console.log(err);
@@ -117,11 +117,13 @@ const Header = () => {
                         Tài khoản
                       </li>
                     </a>
-                    <a href>
+
+                    <Link to="/change-password">
                       <li className="hover:text-primary-color pb-1">
                         Đổi mật khẩu
                       </li>
-                    </a>
+                    </Link>
+
                     <a
                       className
                       onClick={() => {

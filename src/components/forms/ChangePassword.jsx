@@ -1,8 +1,12 @@
+import axios from "axios";
 import { Formik, useFormik } from "formik";
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 
 const ChangePassword = () => {
+  const navigate=useNavigate()
+  
   const formik = useFormik({
     initialValues: {
       oldPassword: "",
@@ -18,7 +22,29 @@ const ChangePassword = () => {
               .oneOf([Yup.ref("newPassword"), null], "Mật khẩu không trùng khớp."),
           }
     ),
-    onSubmit: {},
+    onSubmit: (value)=>{
+      axios
+      .post(
+        "http://127.0.0.1:8000/api/auth/change-password",
+        {
+          old_password: value.oldPassword,
+          new_password: value.newPassword,
+          new_password_confirmation: value.confirmNewPassword,
+        },
+        {headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        },
+      }
+      )
+      .then((res) => {
+        console.log(res);
+        alert("Change Password Success");
+        navigate("/");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    },
   });
 
   return (
