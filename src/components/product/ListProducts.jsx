@@ -1,6 +1,48 @@
+import axios from "axios";
 import React from "react";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const ListProduct = () => {
+  const [listProduct, setListProduct] = useState([]);
+  //Pagination
+  const [paginate, setPaginate] = useState([]);
+  const [indexPage, setIdexPage] = useState(1);
+  //Add To Cart
+  const handleAddToCart = (item) => {
+    axios.post(
+      "http://127.0.0.1:8000/api/cart",
+      {
+        product_id: item,
+        quantity: 1,
+      },
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+        },
+      }
+    );
+  };
+  useEffect(() => {
+    axios
+      .get("http://127.0.0.1:8000/api/products", {
+        params: {
+          page: indexPage,
+        },
+      })
+      .then((res) => {
+        //log response
+        console.log(res.data.data);
+        //Paginate
+        setPaginate(res.data.data);
+
+        //List Product
+        setListProduct(res.data.data.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, [indexPage]);
   return (
     <div className="min-h-screen">
       <div className="pt-5 pb-2 bg-white">
@@ -22,9 +64,7 @@ const ListProduct = () => {
                 <i className="fas fa-list pr-2" /> Danh mục
               </h3>
               <ul className="bg-slate-100 p-2 border-solid border-[#e8e8e8] border-2">
-                <div className="hover:cursor-pointer">
-
-                </div>
+                <div className="hover:cursor-pointer"></div>
                 <li>...</li>
               </ul>
             </div>
@@ -54,13 +94,23 @@ const ListProduct = () => {
                   </select>
                 </div>
                 <div>
-                  <span className="text-primary-color">1</span>
-                  <span className="mx-1">/14</span>
+                  <span className="text-primary-color">{indexPage}</span>
+                  <span className="mx-1">/{paginate.last_page}</span>
                   <i
+                    onClick={() => {
+                      setIdexPage(indexPage > 1 ? indexPage - 1 : indexPage);
+                    }}
                     className="hover:cursor-pointer p-[8px_12px] bg-white arrow-right fas fa-chevron-left pr-2 text-blue-500"
                     aria-hidden="true"
                   />
                   <i
+                    onClick={() => {
+                      setIdexPage(
+                        indexPage < paginate.last_page
+                          ? indexPage + 1
+                          : indexPage
+                      );
+                    }}
                     className="hover:cursor-pointer p-[8px_12px] bg-white arrow-right fas fa-chevron-right pr-2 text-blue-500"
                     aria-hidden="true"
                   />
@@ -68,240 +118,33 @@ const ListProduct = () => {
               </div>
             </div>
             <div className="row mobile:p-[0_8px]">
-              <div className="col l-2-4 md-4 c-6 pc:mt-3 ">
-                <div className="h-[316px] transition ease-in-out duration-300 hover:scale-105 mb-2 p-2 border hover:cursor-pointer hover:border-primary-color border-gray-300 border-solid relative after:absolute after:rounded-[99%] after:content-['50%'] after:p-1 after:text-center after:bg-primary-color/80 after:h-10 after:w-10 after:font-semibold after: after:top-4">
-                  <img
-                    className="object-cover block m-auto h-[228px] w-[168px]"
-                    src="https://bizweb.dktcdn.net/thumb/1024x1024/100/343/934/products/iphone-8-red-do-1-400x460.png"
-                    alt
-                  />
-                  <span className="line-clamp-2 text-primary-color pb-3 leading-[20px] max-h-[40px]">
-                    iPhone 8 64GB
-                  </span>
-                  <span className="block text-red-500 font-semibold text-[20px]">
-                    2.300.000đ
-                  </span>
+              //Show list product
+              {listProduct.map((item) => (
+                <div key={item.id} className="col l-2-4 md-4 c-6 pc:mt-3 ">
+                  <div className="h-[316px] transition ease-in-out duration-300 hover:scale-105 mb-2 p-2 border hover:cursor-pointer hover:border-primary-color border-gray-300 border-solid relative after:absolute after:rounded-[99%] after:content-['50%'] after:p-1 after:text-center after:bg-primary-color/80 after:h-10 after:w-10 after:font-semibold after: after:top-4">
+                    <img
+                      className="object-cover block m-auto h-[228px] w-[168px]"
+                      // src="https://bizweb.dktcdn.net/thumb/1024x1024/100/343/934/products/iphone-8-red-do-1-400x460.png"
+                      alt="IMAGE"
+                      src={item.image}
+                    />
+                    <span className="line-clamp-2 text-primary-color pb-3 leading-[20px] max-h-[40px]">
+                      {item.name}
+                    </span>
+                    <span className="block text-red-500 font-semibold text-[20px]">
+                      {item.price} USD
+                    </span>
+                    <span
+                      className="block text-red-500 font-semibold text-[20px]"
+                      onClick={() => {
+                        handleAddToCart(item.id);
+                      }}
+                    >
+                      Thêm vào giỏ hàng
+                    </span>
+                  </div>
                 </div>
-              </div>
-              <div className="col l-2-4 md-4 c-6 pc:mt-3 ">
-                <div className="h-[316px] transition ease-in-out duration-300 hover:scale-105 mb-2 p-2 border hover:cursor-pointer hover:border-primary-color border-gray-300 border-solid relative after:absolute after:rounded-[99%] after:content-['50%'] after:p-1 after:text-center after:bg-primary-color/80 after:h-10 after:w-10 after:font-semibold after: after:top-4">
-                  <img
-                    className="object-cover block m-auto h-[228px] w-[168px]"
-                    src="https://dienthoaimoi.vn/images/products/2020/11/12/resized/ip8_den_1605168857.png"
-                    alt
-                  />
-                  <span className="line-clamp-2 text-primary-color pb-3 leading-[20px] max-h-[40px]">
-                    iPhone 8 64GB
-                  </span>
-                  <span className="block text-red-500 font-semibold text-[20px]">
-                    2.300.000đ
-                  </span>
-                </div>
-              </div>
-              <div className="col l-2-4 md-4 c-6 pc:mt-3 ">
-                <div className="h-[316px] transition ease-in-out duration-300 hover:scale-105 mb-2 p-2 border hover:cursor-pointer hover:border-primary-color border-gray-300 border-solid relative after:absolute after:rounded-[99%] after:content-['50%'] after:p-1 after:text-center after:bg-primary-color/80 after:h-10 after:w-10 after:font-semibold after: after:top-4">
-                  <img
-                    className="object-cover block m-auto h-[228px] w-[168px]"
-                    src="https://bizweb.dktcdn.net/thumb/1024x1024/100/343/934/products/iphone-8-red-do-1-400x460.png"
-                    alt
-                  />
-                  <span className="line-clamp-2 text-primary-color pb-3 leading-[20px] max-h-[40px]">
-                    Máy lọc không khí Sharp FF-F30E Máy lọc không khí Sharp
-                    FF-F30E Máy lọc không khí Sharp FF-F30E
-                  </span>
-                  <span className="block text-red-500 font-semibold text-[20px]">
-                    2.300.000đ
-                  </span>
-                </div>
-              </div>
-              <div className="col l-2-4 md-4 c-6 pc:mt-3 ">
-                <div className="h-[316px] transition ease-in-out duration-300 hover:scale-105 mb-2 p-2 border hover:cursor-pointer hover:border-primary-color border-gray-300 border-solid relative after:absolute after:rounded-[99%] after:content-['50%'] after:p-1 after:text-center after:bg-primary-color/80 after:h-10 after:w-10 after:font-semibold after: after:top-4">
-                  <img
-                    className="object-cover block m-auto h-[228px] w-[168px]"
-                    src="https://bizweb.dktcdn.net/100/372/934/products/11-den.png?v=1582103575993"
-                    alt
-                  />
-                  <span className="line-clamp-2 text-primary-color pb-3 leading-[20px] max-h-[40px]">
-                    Máy lọc không khí Sharp FF-F30E Máy lọc không khí Sharp
-                    FF-F30E Máy lọc không khí Sharp FF-F30E
-                  </span>
-                  <span className="block text-red-500 font-semibold text-[20px]">
-                    2.300.000đ
-                  </span>
-                </div>
-              </div>
-              <div className="col l-2-4 md-4 c-6 pc:mt-3 ">
-                <div className="h-[316px] transition ease-in-out duration-300 hover:scale-105 mb-2 p-2 border hover:cursor-pointer hover:border-primary-color border-gray-300 border-solid relative after:absolute after:rounded-[99%] after:content-['50%'] after:p-1 after:text-center after:bg-primary-color/80 after:h-10 after:w-10 after:font-semibold after: after:top-4">
-                  <img
-                    className="object-cover block m-auto h-[228px] w-[168px]"
-                    src="https://bizweb.dktcdn.net/thumb/1024x1024/100/343/934/products/iphone-8-red-do-1-400x460.png"
-                    alt
-                  />
-                  <span className="line-clamp-2 text-primary-color pb-3 leading-[20px] max-h-[40px]">
-                    Máy lọc không khí Sharp FF-F30E Máy lọc không khí Sharp
-                    FF-F30E Máy lọc không khí Sharp FF-F30E
-                  </span>
-                  <span className="block text-red-500 font-semibold text-[20px]">
-                    2.300.000đ
-                  </span>
-                </div>
-              </div>
-              <div className="col l-2-4 md-4 c-6 pc:mt-3 ">
-                <div className="h-[316px] transition ease-in-out duration-300 hover:scale-105 mb-2 p-2 border hover:cursor-pointer hover:border-primary-color border-gray-300 border-solid relative after:absolute after:rounded-[99%] after:content-['50%'] after:p-1 after:text-center after:bg-primary-color/80 after:h-10 after:w-10 after:font-semibold after: after:top-4">
-                  <img
-                    className="object-cover block m-auto h-[228px] w-[168px]"
-                    src="https://bizweb.dktcdn.net/thumb/1024x1024/100/343/934/products/iphone-8-red-do-1-400x460.png"
-                    alt
-                  />
-                  <span className="line-clamp-2 text-primary-color pb-3 leading-[20px] max-h-[40px]">
-                    iPhone 8 64GB
-                  </span>
-                  <span className="block text-red-500 font-semibold text-[20px]">
-                    2.300.000đ
-                  </span>
-                </div>
-              </div>
-              <div className="col l-2-4 md-4 c-6 pc:mt-3 ">
-                <div className="h-[316px] transition ease-in-out duration-300 hover:scale-105 mb-2 p-2 border hover:cursor-pointer hover:border-primary-color border-gray-300 border-solid relative after:absolute after:rounded-[99%] after:content-['50%'] after:p-1 after:text-center after:bg-primary-color/80 after:h-10 after:w-10 after:font-semibold after: after:top-4">
-                  <img
-                    className="object-cover block m-auto h-[228px] w-[168px]"
-                    src="https://dienthoaimoi.vn/images/products/2020/11/12/resized/ip8_den_1605168857.png"
-                    alt
-                  />
-                  <span className="line-clamp-2 text-primary-color pb-3 leading-[20px] max-h-[40px]">
-                    iPhone 8 64GB
-                  </span>
-                  <span className="block text-red-500 font-semibold text-[20px]">
-                    2.300.000đ
-                  </span>
-                </div>
-              </div>
-              <div className="col l-2-4 md-4 c-6 pc:mt-3 ">
-                <div className="h-[316px] transition ease-in-out duration-300 hover:scale-105 mb-2 p-2 border hover:cursor-pointer hover:border-primary-color border-gray-300 border-solid relative after:absolute after:rounded-[99%] after:content-['50%'] after:p-1 after:text-center after:bg-primary-color/80 after:h-10 after:w-10 after:font-semibold after: after:top-4">
-                  <img
-                    className="object-cover block m-auto h-[228px] w-[168px]"
-                    src="https://bizweb.dktcdn.net/thumb/1024x1024/100/343/934/products/iphone-8-red-do-1-400x460.png"
-                    alt
-                  />
-                  <span className="line-clamp-2 text-primary-color pb-3 leading-[20px] max-h-[40px]">
-                    Máy lọc không khí Sharp FF-F30E Máy lọc không khí Sharp
-                    FF-F30E Máy lọc không khí Sharp FF-F30E
-                  </span>
-                  <span className="block text-red-500 font-semibold text-[20px]">
-                    2.300.000đ
-                  </span>
-                </div>
-              </div>
-              <div className="col l-2-4 md-4 c-6 pc:mt-3 ">
-                <div className="h-[316px] transition ease-in-out duration-300 hover:scale-105 mb-2 p-2 border hover:cursor-pointer hover:border-primary-color border-gray-300 border-solid relative after:absolute after:rounded-[99%] after:content-['50%'] after:p-1 after:text-center after:bg-primary-color/80 after:h-10 after:w-10 after:font-semibold after: after:top-4">
-                  <img
-                    className="object-cover block m-auto h-[228px] w-[168px]"
-                    src="https://bizweb.dktcdn.net/100/372/934/products/11-den.png?v=1582103575993"
-                    alt
-                  />
-                  <span className="line-clamp-2 text-primary-color pb-3 leading-[20px] max-h-[40px]">
-                    Máy lọc không khí Sharp FF-F30E Máy lọc không khí Sharp
-                    FF-F30E Máy lọc không khí Sharp FF-F30E
-                  </span>
-                  <span className="block text-red-500 font-semibold text-[20px]">
-                    2.300.000đ
-                  </span>
-                </div>
-              </div>
-              <div className="col l-2-4 md-4 c-6 pc:mt-3 ">
-                <div className="h-[316px] transition ease-in-out duration-300 hover:scale-105 mb-2 p-2 border hover:cursor-pointer hover:border-primary-color border-gray-300 border-solid relative after:absolute after:rounded-[99%] after:content-['50%'] after:p-1 after:text-center after:bg-primary-color/80 after:h-10 after:w-10 after:font-semibold after: after:top-4">
-                  <img
-                    className="object-cover block m-auto h-[228px] w-[168px]"
-                    src="https://bizweb.dktcdn.net/thumb/1024x1024/100/343/934/products/iphone-8-red-do-1-400x460.png"
-                    alt
-                  />
-                  <span className="line-clamp-2 text-primary-color pb-3 leading-[20px] max-h-[40px]">
-                    Máy lọc không khí Sharp FF-F30E Máy lọc không khí Sharp
-                    FF-F30E Máy lọc không khí Sharp FF-F30E
-                  </span>
-                  <span className="block text-red-500 font-semibold text-[20px]">
-                    2.300.000đ
-                  </span>
-                </div>
-              </div>
-              <div className="col l-2-4 md-4 c-6 pc:mt-3 ">
-                <div className="h-[316px] transition ease-in-out duration-300 hover:scale-105 mb-2 p-2 border hover:cursor-pointer hover:border-primary-color border-gray-300 border-solid relative after:absolute after:rounded-[99%] after:content-['50%'] after:p-1 after:text-center after:bg-primary-color/80 after:h-10 after:w-10 after:font-semibold after: after:top-4">
-                  <img
-                    className="object-cover block m-auto h-[228px] w-[168px]"
-                    src="https://bizweb.dktcdn.net/thumb/1024x1024/100/343/934/products/iphone-8-red-do-1-400x460.png"
-                    alt
-                  />
-                  <span className="line-clamp-2 text-primary-color pb-3 leading-[20px] max-h-[40px]">
-                    iPhone 8 64GB
-                  </span>
-                  <span className="block text-red-500 font-semibold text-[20px]">
-                    2.300.000đ
-                  </span>
-                </div>
-              </div>
-              <div className="col l-2-4 md-4 c-6 pc:mt-3 ">
-                <div className="h-[316px] transition ease-in-out duration-300 hover:scale-105 mb-2 p-2 border hover:cursor-pointer hover:border-primary-color border-gray-300 border-solid relative after:absolute after:rounded-[99%] after:content-['50%'] after:p-1 after:text-center after:bg-primary-color/80 after:h-10 after:w-10 after:font-semibold after: after:top-4">
-                  <img
-                    className="object-cover block m-auto h-[228px] w-[168px]"
-                    src="https://dienthoaimoi.vn/images/products/2020/11/12/resized/ip8_den_1605168857.png"
-                    alt
-                  />
-                  <span className="line-clamp-2 text-primary-color pb-3 leading-[20px] max-h-[40px]">
-                    iPhone 8 64GB
-                  </span>
-                  <span className="block text-red-500 font-semibold text-[20px]">
-                    2.300.000đ
-                  </span>
-                </div>
-              </div>
-              <div className="col l-2-4 md-4 c-6 pc:mt-3 ">
-                <div className="h-[316px] transition ease-in-out duration-300 hover:scale-105 mb-2 p-2 border hover:cursor-pointer hover:border-primary-color border-gray-300 border-solid relative after:absolute after:rounded-[99%] after:content-['50%'] after:p-1 after:text-center after:bg-primary-color/80 after:h-10 after:w-10 after:font-semibold after: after:top-4">
-                  <img
-                    className="object-cover block m-auto h-[228px] w-[168px]"
-                    src="https://bizweb.dktcdn.net/thumb/1024x1024/100/343/934/products/iphone-8-red-do-1-400x460.png"
-                    alt
-                  />
-                  <span className="line-clamp-2 text-primary-color pb-3 leading-[20px] max-h-[40px]">
-                    Máy lọc không khí Sharp FF-F30E Máy lọc không khí Sharp
-                    FF-F30E Máy lọc không khí Sharp FF-F30E
-                  </span>
-                  <span className="block text-red-500 font-semibold text-[20px]">
-                    2.300.000đ
-                  </span>
-                </div>
-              </div>
-              <div className="col l-2-4 md-4 c-6 pc:mt-3 ">
-                <div className="h-[316px] transition ease-in-out duration-300 hover:scale-105 mb-2 p-2 border hover:cursor-pointer hover:border-primary-color border-gray-300 border-solid relative after:absolute after:rounded-[99%] after:content-['50%'] after:p-1 after:text-center after:bg-primary-color/80 after:h-10 after:w-10 after:font-semibold after: after:top-4">
-                  <img
-                    className="object-cover block m-auto h-[228px] w-[168px]"
-                    src="https://bizweb.dktcdn.net/100/372/934/products/11-den.png?v=1582103575993"
-                    alt
-                  />
-                  <span className="line-clamp-2 text-primary-color pb-3 leading-[20px] max-h-[40px]">
-                    Máy lọc không khí Sharp FF-F30E Máy lọc không khí Sharp
-                    FF-F30E Máy lọc không khí Sharp FF-F30E
-                  </span>
-                  <span className="block text-red-500 font-semibold text-[20px]">
-                    2.300.000đ
-                  </span>
-                </div>
-              </div>
-              <div className="col l-2-4 md-4 c-6 pc:mt-3 ">
-                <div className="h-[316px] transition ease-in-out duration-300 hover:scale-105 mb-2 p-2 border hover:cursor-pointer hover:border-primary-color border-gray-300 border-solid relative after:absolute after:rounded-[99%] after:content-['50%'] after:p-1 after:text-center after:bg-primary-color/80 after:h-10 after:w-10 after:font-semibold after: after:top-4">
-                  <img
-                    className="object-cover block m-auto h-[228px] w-[168px]"
-                    src="https://bizweb.dktcdn.net/thumb/1024x1024/100/343/934/products/iphone-8-red-do-1-400x460.png"
-                    alt
-                  />
-                  <span className="line-clamp-2 text-primary-color pb-3 leading-[20px] max-h-[40px]">
-                    Máy lọc không khí Sharp FF-F30E Máy lọc không khí Sharp
-                    FF-F30E Máy lọc không khí Sharp FF-F30E
-                  </span>
-                  <span className="block text-red-500 font-semibold text-[20px]">
-                    2.300.000đ
-                  </span>
-                </div>
-              </div>
+              ))}
             </div>
           </div>
         </div>

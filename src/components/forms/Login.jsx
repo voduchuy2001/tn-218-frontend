@@ -33,6 +33,7 @@ const Login = () => {
 
         })
         .catch((error) => {
+          alert("Lỗi thông tin đăng nhập!!!");
           console.error(error);
         });
     },

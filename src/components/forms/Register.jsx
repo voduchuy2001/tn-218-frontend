@@ -39,6 +39,7 @@ const Register = () => {
         })
         .catch((error) => {
           console.error(error);
+          alert("email đã tồn tại!Vui lòng thử lại!!!");
         });
     }
   });

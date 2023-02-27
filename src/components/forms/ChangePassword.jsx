@@ -42,6 +42,7 @@ const ChangePassword = () => {
         navigate("/");
       })
       .catch((err) => {
+        alert("Đã có lỗi xảy ra! Vui lòng thử lại!!!");
         console.log(err);
       });
     },
