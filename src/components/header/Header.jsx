@@ -1,9 +1,13 @@
 import axios from "axios";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
+import {
+    increment
+  } from "../../features/counter/counterSlice"
+  import {useDispatch } from 'react-redux';
 const Header = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const config = {
         headers: {
             Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -25,7 +29,9 @@ const Header = () => {
             .then((res) => {
                 console.log(res);
                 localStorage.clear();
+                dispatch(increment())
                 navigate("/login");
+
             })
             .catch((err) => {
                 console.log(err);
