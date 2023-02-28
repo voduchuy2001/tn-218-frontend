@@ -124,10 +124,14 @@ const Navbar = () => {
                 {/* Has carts */}
 
                 <div className="p-2 text-right cursor-default">
-                  <button className="hover:opacity-90 font-semibold text-[12px] p-[8px_12px] bg-primary-color">
-                    Xem giỏ hàng
-                  </button>
-                </div>
+                                <Link
+                                    to="/cart"
+                                    className="hover:opacity-90 font-semibold text-[12px] p-[8px_12px] bg-primary-color text-white"
+                                >
+                                    Xem giỏ hàng
+                                </Link>
+                            </div>
+                            
               </div>
             </div>
           ) : (
