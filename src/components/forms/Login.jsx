@@ -3,8 +3,13 @@ import { useFormik } from "formik";
 import React from "react";
 import { Link, useNavigate } from "react-router-dom";
 import * as Yup from "yup";
+import {
+  increment
+} from "../../features/counter/counterSlice"
+import {useDispatch } from 'react-redux';
 
 const Login = () => {
+    const dispatch=useDispatch()
     const navigate = useNavigate();
     // validate
     const formik = useFormik({
@@ -29,6 +34,7 @@ const Login = () => {
                     console.log(res.data);
                     localStorage.setItem("access_token", res.data.access_token);
                     localStorage.setItem("user", res.data.user.name);
+                    dispatch(increment())
                     navigate("/");
                 })
                 .catch((error) => {
