@@ -13,8 +13,7 @@ const ProductDetail = () => {
                             <img
                                 className="tablet:h-[400px]  mobile:h-[300px] h-full w-[100%] object-contain"
                                 src="https://cdn2.cellphones.com.vn/358x/media/catalog/product/i/p/iphone_13-_pro-2_2.jpg"
-                                alt
-                                srcSet
+                                alt=""
                             />
                         </section>
                     </div>
@@ -50,7 +49,7 @@ const ProductDetail = () => {
                             </div>
                         </div>
                         {/* Color Options */}
-                        <div className>
+                        <div>
                             <h2 className="font-semibold my-1">
                                 Chọn màu để xem giá và chi nhánh có hàng
                             </h2>
@@ -60,7 +59,7 @@ const ProductDetail = () => {
                                         <img
                                             className="p-1 w-[30px] h-[30px]"
                                             src="https://cdn2.cellphones.com.vn/35x/media/catalog/product/i/p/iphone_13_pro_max_alpine_green_pure_back_iphone_13_pro_max_alpine_green_pure_front_2-up_screen__usen.png"
-                                            alt
+                                            alt=""
                                         />
                                         <div>
                                             <h3>Xanh lá</h3>
@@ -73,7 +72,7 @@ const ProductDetail = () => {
                                         <img
                                             className="p-1 w-[30px] h-[30px]"
                                             src="https://cdn2.cellphones.com.vn/35x/media/catalog/product/i/p/iphone_13_pro_max_alpine_green_pure_back_iphone_13_pro_max_alpine_green_pure_front_2-up_screen__usen.png"
-                                            alt
+                                            alt=""
                                         />
                                         <div>
                                             <h3>Xanh lá</h3>
@@ -86,7 +85,7 @@ const ProductDetail = () => {
                                         <img
                                             className="p-1 w-[30px] h-[30px]"
                                             src="https://cdn2.cellphones.com.vn/35x/media/catalog/product/i/p/iphone_13_pro_max_alpine_green_pure_back_iphone_13_pro_max_alpine_green_pure_front_2-up_screen__usen.png"
-                                            alt
+                                            alt="abc"
                                         />
                                         <div>
                                             <h3>Xanh lá</h3>
@@ -99,7 +98,7 @@ const ProductDetail = () => {
                                         <img
                                             className="p-1 w-[30px] h-[30px]"
                                             src="https://cdn2.cellphones.com.vn/35x/media/catalog/product/i/p/iphone_13_pro_max_alpine_green_pure_back_iphone_13_pro_max_alpine_green_pure_front_2-up_screen__usen.png"
-                                            alt
+                                            alt="abc"
                                         />
                                         <div>
                                             <h3>Xanh lá</h3>
@@ -112,10 +111,7 @@ const ProductDetail = () => {
                         {/* Buy btn and add to cart btn */}
                         <div className="row sm-gutter">
                             <div className="col l-8 md-8 c-8">
-                                <button
-                                    onclick
-                                    className="btn-primary w-full h-[50px]"
-                                >
+                                <button className="btn-primary w-full h-[50px]">
                                     MUA NGAY
                                 </button>
                             </div>
@@ -138,16 +134,16 @@ const ProductDetail = () => {
                             <img
                                 className="w-full px-2 object-contain h-[220px]"
                                 src="./img/others/support_online.png"
-                                alt
+                                alt=""
                             />
                             <span className="text-[#7a7d8d]">
                                 Để được hỗ trợ tốt nhất hãy gọi
                             </span>
-                            <a href="tel:0123456789">
+                            <span>
                                 <h2 className="hover:text-blue-500 font-bold text-[20px]">
                                     01234 567 89
                                 </h2>
-                            </a>
+                            </span>
                             <span className="bg-white inline-block px-2">
                                 Hoặc
                             </span>
@@ -164,13 +160,13 @@ const ProductDetail = () => {
                     <div className="col l-8 md-12 c-12">
                         {/* Ở chỗ này khi tạo đường viền nên xài sudoclass để se bg-color sẽ tiện hơn */}
                         <div className="border-b-[2px] border-solid border-b-[#eae9ef] ">
-                            <a
+                            <span
                                 className="hover:cursor-pointer feedback introdution p-[3px_12px_4px_12px] font-semibold text-[#aaa] relative hover:text-black after:w-full  hover:after:bg-black uppercase after:bg-[#eae9ef] after:content-[''] after:h-[1px] 
                       after:bottom-0 after:left-0 after:absolute
                        "
                             >
                                 Mô tả
-                            </a>
+                            </span>
                             <p>
                                 Lorem ipsum dolor sit amet consectetur
                                 adipisicing elit. Quia esse ab consectetur
@@ -240,7 +236,7 @@ const ProductDetail = () => {
                                         iPhone 13 Pro không có nhiều sự thay đổi
                                         về thiết kế, khi máy vẫn sở hữu kiểu
                                         dáng tương tự như&nbsp;
-                                        <a
+                                        <span
                                             style={{
                                                 boxSizing: "border-box",
                                                 backgroundColor: "transparent",
@@ -251,12 +247,9 @@ const ProductDetail = () => {
                                                 transition: "all 0.2s ease 0s",
                                             }}
                                             title="Tham khảo giá điện thoại iPhone 12 Pro chính hãng"
-                                            href="https://www.thegioididong.com/dtdd/iphone-12-pro"
-                                            target="_blank"
-                                            rel="noopener"
                                         >
                                             iPhone 12 Pro
-                                        </a>
+                                        </span>
                                         &nbsp;với các cạnh viền vuông vắn và hai
                                         mặt kính cường lực cao cấp. Sở hữu 4
                                         phiên bản màu gồm xanh dương, bạc, vàng
@@ -274,7 +267,7 @@ const ProductDetail = () => {
                                             fontSize: "16px !important",
                                         }}
                                     >
-                                        <a
+                                        <span
                                             className="preventdefault"
                                             style={{
                                                 boxSizing: "border-box",
@@ -286,7 +279,6 @@ const ProductDetail = () => {
                                                 transition: "all 0.2s ease 0s",
                                                 cursor: "default",
                                             }}
-                                            href="https://www.thegioididong.com/images/42/230521/iphone-13-pro-1.jpg"
                                         >
                                             <img
                                                 className=" ls-is-cached lazyloaded"
@@ -306,7 +298,7 @@ const ProductDetail = () => {
                                                 alt="Sở hữu 4 phiên bản màu sắc trẻ trung - iPhone 13 Pro 128GB"
                                                 data-src="https://cdn.tgdd.vn/Products/Images/42/230521/iphone-13-pro-1.jpg"
                                             />
-                                        </a>
+                                        </span>
                                     </p>
                                     <p
                                         style={{
@@ -320,7 +312,7 @@ const ProductDetail = () => {
                                         }}
                                     >
                                         Máy đạt tiêu chuẩn&nbsp;
-                                        <a
+                                        <span
                                             style={{
                                                 boxSizing: "border-box",
                                                 backgroundColor: "transparent",
@@ -331,12 +323,9 @@ const ProductDetail = () => {
                                                 transition: "all 0.2s ease 0s",
                                             }}
                                             title="Tham khảo điện thoại chống nước bụi tại Thế Giới Di Động"
-                                            href="https://www.thegioididong.com/dtdd-chong-nuoc-bui"
-                                            target="_blank"
-                                            rel="noopener"
                                         >
                                             kháng nước và bụi
-                                        </a>
+                                        </span>
                                         &nbsp;IP68 có khả năng chống lại một số
                                         hạt bụi, và được bảo vệ khi rơi xuống
                                         nước ở độ sâu đến 6 mét trong 30
@@ -356,7 +345,7 @@ const ProductDetail = () => {
                                             fontSize: "16px !important",
                                         }}
                                     >
-                                        <a
+                                        <span
                                             className="preventdefault"
                                             style={{
                                                 boxSizing: "border-box",
@@ -368,7 +357,6 @@ const ProductDetail = () => {
                                                 transition: "all 0.2s ease 0s",
                                                 cursor: "default",
                                             }}
-                                            href="https://www.thegioididong.com/images/42/230521/iphone-13-pro-2.jpg"
                                         >
                                             <img
                                                 className=" ls-is-cached lazyloaded"
@@ -388,7 +376,7 @@ const ProductDetail = () => {
                                                 alt="Khả năng kháng bụi, nước - iPhone 13 Pro 128GB"
                                                 data-src="https://cdn.tgdd.vn/Products/Images/42/230521/iphone-13-pro-2.jpg"
                                             />
-                                        </a>
+                                        </span>
                                     </p>
                                 </div>
                                 <h3
@@ -451,7 +439,7 @@ const ProductDetail = () => {
                                             fontSize: "16px !important",
                                         }}
                                     >
-                                        <a
+                                        <span
                                             className="preventdefault"
                                             style={{
                                                 boxSizing: "border-box",
@@ -463,7 +451,6 @@ const ProductDetail = () => {
                                                 transition: "all 0.2s ease 0s",
                                                 cursor: "default",
                                             }}
-                                            href="https://www.thegioididong.com/images/42/230521/iphone-13-pro-man-hinh.jpg"
                                         >
                                             <img
                                                 className=" lazyloaded"
@@ -483,7 +470,7 @@ const ProductDetail = () => {
                                                 alt="Trang bị màn hình 6.1 inch - iPhone 13 Pro 128GB"
                                                 data-src="https://cdn.tgdd.vn/Products/Images/42/230521/iphone-13-pro-man-hinh.jpg"
                                             />
-                                        </a>
+                                        </span>
                                     </p>
                                     <p
                                         style={{
@@ -503,7 +490,7 @@ const ProductDetail = () => {
                                         cảnh khi lướt ngón tay trên màn hình trở
                                         nên mượt mà hơn đồng thời hiệu ứng thị
                                         giác khi chúng ta dùng&nbsp;
-                                        <a
+                                        <span
                                             style={{
                                                 boxSizing: "border-box",
                                                 backgroundColor: "transparent",
@@ -514,12 +501,9 @@ const ProductDetail = () => {
                                                 transition: "all 0.2s ease 0s",
                                             }}
                                             title="Tham khảo các mẫu điện thoại chơi game tại Thế Giới Di Động"
-                                            href="https://www.thegioididong.com/dtdd-choi-game"
-                                            target="_blank"
-                                            rel="noopener"
                                         >
                                             điện thoại chơi game
-                                        </a>
+                                        </span>
                                         &nbsp;hoặc xem video cũng cực kỳ mãn
                                         nhãn.
                                     </p>
@@ -534,7 +518,7 @@ const ProductDetail = () => {
                                             fontSize: "16px !important",
                                         }}
                                     >
-                                        <a
+                                        <span
                                             className="preventdefault"
                                             style={{
                                                 boxSizing: "border-box",
@@ -546,7 +530,6 @@ const ProductDetail = () => {
                                                 transition: "all 0.2s ease 0s",
                                                 cursor: "default",
                                             }}
-                                            href="https://www.thegioididong.com/images/42/230521/iphone-13-pro-5.jpg"
                                         >
                                             <img
                                                 className=" lazyloaded"
@@ -566,7 +549,7 @@ const ProductDetail = () => {
                                                 alt="Chuyển động mượt mà nhờ tần số 120 Hz - iPhone 13 Pro 128GB"
                                                 data-src="https://cdn.tgdd.vn/Products/Images/42/230521/iphone-13-pro-5.jpg"
                                             />
-                                        </a>
+                                        </span>
                                     </p>
                                     <p
                                         style={{
@@ -597,7 +580,7 @@ const ProductDetail = () => {
                                             fontSize: "16px !important",
                                         }}
                                     >
-                                        <a
+                                        <span
                                             className="preventdefault"
                                             style={{
                                                 boxSizing: "border-box",
@@ -609,7 +592,6 @@ const ProductDetail = () => {
                                                 transition: "all 0.2s ease 0s",
                                                 cursor: "default",
                                             }}
-                                            href="https://www.thegioididong.com/images/42/230521/iphone-13-pro-4.jpg"
                                         >
                                             <img
                                                 className=" lazyloaded"
@@ -629,7 +611,7 @@ const ProductDetail = () => {
                                                 alt="Tốc độ làm tươi được tự động hóa - iPhone 13 Pro 128GB"
                                                 data-src="https://cdn.tgdd.vn/Products/Images/42/230521/iphone-13-pro-4.jpg"
                                             />
-                                        </a>
+                                        </span>
                                     </p>
                                     <p
                                         style={{
@@ -661,7 +643,7 @@ const ProductDetail = () => {
                                             fontSize: "16px !important",
                                         }}
                                     >
-                                        <a
+                                        <span
                                             className="preventdefault"
                                             style={{
                                                 boxSizing: "border-box",
@@ -673,7 +655,6 @@ const ProductDetail = () => {
                                                 transition: "all 0.2s ease 0s",
                                                 cursor: "default",
                                             }}
-                                            href="https://www.thegioididong.com/images/42/230521/iphone-13-pro-6.jpg"
                                         >
                                             <img
                                                 className=" lazyloaded"
@@ -693,7 +674,7 @@ const ProductDetail = () => {
                                                 alt="Độ sáng đạt 1200 nits - iPhone 13 Pro 128GB"
                                                 data-src="https://cdn.tgdd.vn/Products/Images/42/230521/iphone-13-pro-6.jpg"
                                             />
-                                        </a>
+                                        </span>
                                     </p>
                                 </div>
                                 <h3
@@ -756,7 +737,7 @@ const ProductDetail = () => {
                                             fontSize: "16px !important",
                                         }}
                                     >
-                                        <a
+                                        <span
                                             className="preventdefault"
                                             style={{
                                                 boxSizing: "border-box",
@@ -768,7 +749,6 @@ const ProductDetail = () => {
                                                 transition: "all 0.2s ease 0s",
                                                 cursor: "default",
                                             }}
-                                            href="https://www.thegioididong.com/images/42/230521/iphone-13-pro-7.jpg"
                                         >
                                             <img
                                                 className="lazyload"
@@ -788,7 +768,7 @@ const ProductDetail = () => {
                                                 alt="Bộ ba ống kính chuyên nghiệp - iPhone 13 Pro 128GB"
                                                 data-src="https://cdn.tgdd.vn/Products/Images/42/230521/iphone-13-pro-7.jpg"
                                             />
-                                        </a>
+                                        </span>
                                     </p>
                                     <p
                                         style={{
@@ -823,7 +803,7 @@ const ProductDetail = () => {
                                             fontSize: "16px !important",
                                         }}
                                     >
-                                        <a
+                                        <span
                                             className="preventdefault"
                                             style={{
                                                 boxSizing: "border-box",
@@ -835,7 +815,6 @@ const ProductDetail = () => {
                                                 transition: "all 0.2s ease 0s",
                                                 cursor: "default",
                                             }}
-                                            href="https://www.thegioididong.com/images/42/230521/iphone-13-pro-8.jpg"
                                         >
                                             <img
                                                 className="lazyload"
@@ -855,7 +834,7 @@ const ProductDetail = () => {
                                                 alt="Camera Ultra Wide lấy nét cực ấn tượng - iPhone 13 Pro 128GB"
                                                 data-src="https://cdn.tgdd.vn/Products/Images/42/230521/iphone-13-pro-8.jpg"
                                             />
-                                        </a>
+                                        </span>
                                     </p>
                                     <p
                                         style={{
@@ -890,7 +869,7 @@ const ProductDetail = () => {
                                             fontSize: "16px !important",
                                         }}
                                     >
-                                        <a
+                                        <span
                                             className="preventdefault"
                                             style={{
                                                 boxSizing: "border-box",
@@ -902,7 +881,6 @@ const ProductDetail = () => {
                                                 transition: "all 0.2s ease 0s",
                                                 cursor: "default",
                                             }}
-                                            href="https://www.thegioididong.com/images/42/230521/iphone-13-pro-9.jpg"
                                         >
                                             <img
                                                 className="lazyload"
@@ -922,7 +900,7 @@ const ProductDetail = () => {
                                                 alt="Chế độ đêm Night Mode - iPhone 13 Pro 128GB"
                                                 data-src="https://cdn.tgdd.vn/Products/Images/42/230521/iphone-13-pro-9.jpg"
                                             />
-                                        </a>
+                                        </span>
                                     </p>
                                     <p
                                         style={{
@@ -955,7 +933,7 @@ const ProductDetail = () => {
                                             fontSize: "16px !important",
                                         }}
                                     >
-                                        <a
+                                        <span
                                             className="preventdefault"
                                             style={{
                                                 boxSizing: "border-box",
@@ -967,7 +945,6 @@ const ProductDetail = () => {
                                                 transition: "all 0.2s ease 0s",
                                                 cursor: "default",
                                             }}
-                                            href="https://www.thegioididong.com/images/42/230521/iphone-13-pro-10.jpg"
                                         >
                                             <img
                                                 className="lazyload"
@@ -987,7 +964,7 @@ const ProductDetail = () => {
                                                 alt="Ảnh chụp trên camera - iPhone 13 Pro 128GB"
                                                 data-src="https://cdn.tgdd.vn/Products/Images/42/230521/iphone-13-pro-10.jpg"
                                             />
-                                        </a>
+                                        </span>
                                     </p>
                                     <p
                                         style={{
@@ -1021,7 +998,7 @@ const ProductDetail = () => {
                                             fontSize: "16px !important",
                                         }}
                                     >
-                                        <a
+                                        <span
                                             className="preventdefault"
                                             style={{
                                                 boxSizing: "border-box",
@@ -1033,7 +1010,6 @@ const ProductDetail = () => {
                                                 transition: "all 0.2s ease 0s",
                                                 cursor: "default",
                                             }}
-                                            href="https://www.thegioididong.com/images/42/230521/iphone-13-pro-11.jpg"
                                         >
                                             <img
                                                 className="lazyload"
@@ -1053,7 +1029,7 @@ const ProductDetail = () => {
                                                 alt="Chế độ điện ảnh độc đáo - iPhone 13 Pro 128GB"
                                                 data-src="https://cdn.tgdd.vn/Products/Images/42/230521/iphone-13-pro-11.jpg"
                                             />
-                                        </a>
+                                        </span>
                                     </p>
                                     <p
                                         style={{
@@ -1085,7 +1061,7 @@ const ProductDetail = () => {
                                             fontSize: "16px !important",
                                         }}
                                     >
-                                        <a
+                                        <span
                                             className="preventdefault"
                                             style={{
                                                 boxSizing: "border-box",
@@ -1097,7 +1073,6 @@ const ProductDetail = () => {
                                                 transition: "all 0.2s ease 0s",
                                                 cursor: "default",
                                             }}
-                                            href="https://www.thegioididong.com/images/42/230521/iphone-13-pro-12.jpg"
                                         >
                                             <img
                                                 className=" lazyloaded"
@@ -1117,7 +1092,7 @@ const ProductDetail = () => {
                                                 alt="Chế độ chụp phong cảnh Photographic Styles - iPhone 13 Pro 128GB"
                                                 data-src="https://cdn.tgdd.vn/Products/Images/42/230521/iphone-13-pro-12.jpg"
                                             />
-                                        </a>
+                                        </span>
                                     </p>
                                     <p
                                         style={{
@@ -1150,7 +1125,7 @@ const ProductDetail = () => {
                                             fontSize: "16px !important",
                                         }}
                                     >
-                                        <a
+                                        <span
                                             className="preventdefault"
                                             style={{
                                                 boxSizing: "border-box",
@@ -1162,7 +1137,6 @@ const ProductDetail = () => {
                                                 transition: "all 0.2s ease 0s",
                                                 cursor: "default",
                                             }}
-                                            href="https://www.thegioididong.com/images/42/230521/iphone-13-pro-13.jpg"
                                         >
                                             <img
                                                 className=" lazyloaded"
@@ -1182,7 +1156,7 @@ const ProductDetail = () => {
                                                 alt="Camera TrueDepth - iPhone 13 Pro 128GB"
                                                 data-src="https://cdn.tgdd.vn/Products/Images/42/230521/iphone-13-pro-13.jpg"
                                             />
-                                        </a>
+                                        </span>
                                     </p>
                                     <p
                                         style={{
@@ -1231,7 +1205,7 @@ const ProductDetail = () => {
                                             fontSize: "16px !important",
                                         }}
                                     >
-                                        <a
+                                        <span
                                             className="preventdefault"
                                             style={{
                                                 boxSizing: "border-box",
@@ -1243,7 +1217,6 @@ const ProductDetail = () => {
                                                 transition: "all 0.2s ease 0s",
                                                 cursor: "default",
                                             }}
-                                            href="https://www.thegioididong.com/images/42/230521/iphone-13-pro-14.jpg"
                                         >
                                             <img
                                                 className=" lazyloaded"
@@ -1263,7 +1236,7 @@ const ProductDetail = () => {
                                                 alt="Hỗ trợ quay video đạt chất lượng 4K - iPhone 13 Pro 128GB"
                                                 data-src="https://cdn.tgdd.vn/Products/Images/42/230521/iphone-13-pro-14.jpg"
                                             />
-                                        </a>
+                                        </span>
                                     </p>
                                 </div>
                                 <h3
@@ -1325,7 +1298,7 @@ const ProductDetail = () => {
                                             fontSize: "16px !important",
                                         }}
                                     >
-                                        <a
+                                        <span
                                             className="preventdefault"
                                             style={{
                                                 boxSizing: "border-box",
@@ -1337,7 +1310,6 @@ const ProductDetail = () => {
                                                 transition: "all 0.2s ease 0s",
                                                 cursor: "default",
                                             }}
-                                            href="https://www.thegioididong.com/images/42/230521/iphone-13-pro-15.jpg"
                                         >
                                             <img
                                                 className=" lazyloaded"
@@ -1357,7 +1329,7 @@ const ProductDetail = () => {
                                                 alt="Vi xử lý Apple A15 Bionic - iPhone 13 Pro 128GB"
                                                 data-src="https://cdn.tgdd.vn/Products/Images/42/230521/iphone-13-pro-15.jpg"
                                             />
-                                        </a>
+                                        </span>
                                     </p>
                                     <p
                                         style={{
@@ -1390,7 +1362,7 @@ const ProductDetail = () => {
                                             fontSize: "16px !important",
                                         }}
                                     >
-                                        <a
+                                        <span
                                             className="preventdefault"
                                             style={{
                                                 boxSizing: "border-box",
@@ -1402,7 +1374,6 @@ const ProductDetail = () => {
                                                 transition: "all 0.2s ease 0s",
                                                 cursor: "default",
                                             }}
-                                            href="https://www.thegioididong.com/images/42/230521/iphone-13-pro-16.jpg"
                                         >
                                             <img
                                                 className=" lazyloaded"
@@ -1422,7 +1393,7 @@ const ProductDetail = () => {
                                                 alt="Đồ họa mượt mà - iPhone 13 Pro 128GB"
                                                 data-src="https://cdn.tgdd.vn/Products/Images/42/230521/iphone-13-pro-16.jpg"
                                             />
-                                        </a>
+                                        </span>
                                     </p>
                                     <p
                                         style={{
@@ -1436,7 +1407,7 @@ const ProductDetail = () => {
                                         }}
                                     >
                                         Máy sở hữu con&nbsp;
-                                        <a
+                                        <span
                                             style={{
                                                 boxSizing: "border-box",
                                                 backgroundColor: "transparent",
@@ -1447,14 +1418,11 @@ const ProductDetail = () => {
                                                 transition: "all 0.2s ease 0s",
                                             }}
                                             title="Tham khảo điện thoại có RAM 6 GB tại Thegioididong.com"
-                                            href="https://www.thegioididong.com/dtdd-ram-6gb"
-                                            target="_blank"
-                                            rel="noopener"
                                         >
                                             RAM 6 GB
-                                        </a>
+                                        </span>
                                         ,&nbsp;
-                                        <a
+                                        <span
                                             style={{
                                                 boxSizing: "border-box",
                                                 backgroundColor: "transparent",
@@ -1465,17 +1433,14 @@ const ProductDetail = () => {
                                                 transition: "all 0.2s ease 0s",
                                             }}
                                             title="Tham khảo điện thoại có ROM 128 GB tại Thegioididong.com"
-                                            href="https://www.thegioididong.com/dtdd-apple-iphone-rom-128gb"
-                                            target="_blank"
-                                            rel="noopener"
                                         >
                                             bộ nhớ trong 128 GB
-                                        </a>
+                                        </span>
                                         , vừa đủ với nhu cầu sử dụng của một
                                         người dùng cơ bản không có nhu cầu quay
                                         video quá nhiều, máy cũng có thêm phiên
                                         bản bộ nhớ trong lên đến&nbsp;
-                                        <a
+                                        <span
                                             style={{
                                                 boxSizing: "border-box",
                                                 backgroundColor: "transparent",
@@ -1486,12 +1451,9 @@ const ProductDetail = () => {
                                                 transition: "all 0.2s ease 0s",
                                             }}
                                             title="Tham khảo iPhone 13 Pro 1 TB tại Thegioididong.com"
-                                            href="https://www.thegioididong.com/dtdd/iphone-13-pro-1tb"
-                                            target="_blank"
-                                            rel="noopener"
                                         >
                                             iPhone 13 Pro 1 TB
-                                        </a>
+                                        </span>
                                         , bạn có thể cân nhắc nếu có nhu cầu lưu
                                         trữ cao.
                                     </p>
@@ -1506,7 +1468,7 @@ const ProductDetail = () => {
                                             fontSize: "16px !important",
                                         }}
                                     >
-                                        <a
+                                        <span
                                             className="preventdefault"
                                             style={{
                                                 boxSizing: "border-box",
@@ -1518,7 +1480,6 @@ const ProductDetail = () => {
                                                 transition: "all 0.2s ease 0s",
                                                 cursor: "default",
                                             }}
-                                            href="https://www.thegioididong.com/images/42/230521/iphone-13-pro-17.jpg"
                                         >
                                             <img
                                                 className=" lazyloaded"
@@ -1538,7 +1499,7 @@ const ProductDetail = () => {
                                                 alt="Dung lượng bộ nhớ - iPhone 13 Pro 128GB"
                                                 data-src="https://cdn.tgdd.vn/Products/Images/42/230521/iphone-13-pro-17.jpg"
                                             />
-                                        </a>
+                                        </span>
                                     </p>
                                     <p
                                         style={{
@@ -1569,7 +1530,7 @@ const ProductDetail = () => {
                                             fontSize: "16px !important",
                                         }}
                                     >
-                                        <a
+                                        <span
                                             className="preventdefault"
                                             style={{
                                                 boxSizing: "border-box",
@@ -1581,7 +1542,6 @@ const ProductDetail = () => {
                                                 transition: "all 0.2s ease 0s",
                                                 cursor: "default",
                                             }}
-                                            href="https://www.thegioididong.com/images/42/230521/iphone-2021-pro-01.jpg"
                                         >
                                             <img
                                                 className=" lazyloaded"
@@ -1601,7 +1561,7 @@ const ProductDetail = () => {
                                                 alt="Hỗ trợ kết nối 5G - iPhone 13 Pro 128GB"
                                                 data-src="https://cdn.tgdd.vn/Products/Images/42/230521/iphone-2021-pro-01.jpg"
                                             />
-                                        </a>
+                                        </span>
                                     </p>
                                     <p
                                         style={{
@@ -1632,7 +1592,7 @@ const ProductDetail = () => {
                                             fontSize: "16px !important",
                                         }}
                                     >
-                                        <a
+                                        <span
                                             className="preventdefault"
                                             style={{
                                                 boxSizing: "border-box",
@@ -1644,7 +1604,6 @@ const ProductDetail = () => {
                                                 transition: "all 0.2s ease 0s",
                                                 cursor: "default",
                                             }}
-                                            href="https://www.thegioididong.com/images/42/230521/iphone-13-pro-18.jpg"
                                         >
                                             <img
                                                 className=" lazyloaded"
@@ -1664,7 +1623,7 @@ const ProductDetail = () => {
                                                 alt="Nền tảng IOS 15 - iPhone 13 Pro 128GB"
                                                 data-src="https://cdn.tgdd.vn/Products/Images/42/230521/iphone-13-pro-18.jpg"
                                             />
-                                        </a>
+                                        </span>
                                     </p>
                                 </div>
                                 <h3
@@ -1725,7 +1684,7 @@ const ProductDetail = () => {
                                             fontSize: "16px !important",
                                         }}
                                     >
-                                        <a
+                                        <span
                                             className="preventdefault"
                                             style={{
                                                 boxSizing: "border-box",
@@ -1737,7 +1696,6 @@ const ProductDetail = () => {
                                                 transition: "all 0.2s ease 0s",
                                                 cursor: "default",
                                             }}
-                                            href="https://www.thegioididong.com/images/42/230521/iphone-13-pro-19.jpg"
                                         >
                                             <img
                                                 className=" lazyloaded"
@@ -1757,7 +1715,7 @@ const ProductDetail = () => {
                                                 alt="Tối ưu hóa năng lượng - iPhone 13 Pro 128GB"
                                                 data-src="https://cdn.tgdd.vn/Products/Images/42/230521/iphone-13-pro-19.jpg"
                                             />
-                                        </a>
+                                        </span>
                                     </p>
                                     <p
                                         style={{
@@ -1801,7 +1759,7 @@ const ProductDetail = () => {
                                             fontSize: "16px !important",
                                         }}
                                     >
-                                        <a
+                                        <span
                                             className="preventdefault"
                                             style={{
                                                 boxSizing: "border-box",
@@ -1813,7 +1771,6 @@ const ProductDetail = () => {
                                                 transition: "all 0.2s ease 0s",
                                                 cursor: "default",
                                             }}
-                                            href="https://www.thegioididong.com/images/42/230521/iphone-13-pro-20.jpg"
                                         >
                                             <img
                                                 className=" lazyloaded"
@@ -1833,7 +1790,7 @@ const ProductDetail = () => {
                                                 alt="Sạc không dây với MagSafe - iPhone 13 Pro 128GB"
                                                 data-src="https://cdn.tgdd.vn/Products/Images/42/230521/iphone-13-pro-20.jpg"
                                             />
-                                        </a>
+                                        </span>
                                     </p>
                                     <p
                                         style={{
@@ -1883,22 +1840,16 @@ const ProductDetail = () => {
                                 </div>
                             </div>
                             <div className="text-center bg-white h-[24px] w-full">
-                                <a
-                                    href
-                                    className="text-blue-700 hover:underline loadmore leading-[24px]"
-                                >
+                                <span className="text-blue-700 hover:underline loadmore leading-[24px]">
                                     Xem thêm{" "}
                                     <i className="fas fa-chevron-down" />
-                                </a>
+                                </span>
                             </div>
                         </div>
                     </div>
                     <div className="col l-4 md-12 c-12">
                         <div className="mb-3 border-b-[2px] border-solid border-b-[#eae9ef] text-center">
-                            <span
-                                href
-                                className="p-[3px_12px_4px_12px] uppercase font-semibold text-[#aaa] "
-                            >
+                            <span className="p-[3px_12px_4px_12px] uppercase font-semibold text-[#aaa] ">
                                 Thông số kỹ thuật
                             </span>
                         </div>

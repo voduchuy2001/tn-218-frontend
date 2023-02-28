@@ -62,22 +62,24 @@ const Header = () => {
                                             </form>
                                         </li>
                                         <li className="text-[16px] p-2 hover:bg-[#ddd] hover:text-black hover:cursor-pointer">
-                                            <a className="block w-full">
+                                            <span className="block w-full">
                                                 Trang chủ
-                                            </a>
+                                            </span>
                                         </li>
                                         <li className="text-[16px] p-2 hover:bg-[#ddd] hover:text-black hover:cursor-pointer">
-                                            <a className="block w-full">
+                                            <span className="block w-full">
                                                 Sản phẩm
-                                            </a>
+                                            </span>
                                         </li>
                                         <li className="text-[16px] p-2 hover:bg-[#ddd] hover:text-black hover:cursor-pointer">
-                                            <a className="block w-full">
+                                            <span className="block w-full">
                                                 Đơn đặt
-                                            </a>
+                                            </span>
                                         </li>
                                         <li className="text-[16px] p-2 hover:bg-[#ddd] hover:text-black hover:cursor-pointer">
-                                            <a className="block w-full">...</a>
+                                            <span className="block w-full">
+                                                ...
+                                            </span>
                                         </li>
                                     </ul>
                                 </div>
@@ -86,13 +88,10 @@ const Header = () => {
                             )}
                         </div>
                         <div className="tablet:hidden mobile:hidden">
-                            <a
-                                href="mailto:abc@gmail.com"
-                                className="text-white"
-                            >
+                            <span className="text-white">
                                 <i className="fas fa-envelope p-1 translate-y-[1px]" />
                                 <span>abc@gmail.com</span>
-                            </a>
+                            </span>
                         </div>
                         {/* Not signed*/}
                         <ul
@@ -119,7 +118,7 @@ const Header = () => {
                             className={
                                 localStorage.getItem("user")
                                     ? " flex p-3"
-                                    : "flex p-3"
+                                    : "hidden p-3"
                             }
                         >
                             <span>
@@ -127,17 +126,18 @@ const Header = () => {
                             </span>
                             <div className="relative group">
                                 <img
+                                    alt="none"
                                     src="https://via.placeholder.com/50"
                                     className="hover:cursor-pointer ml-2 rounded-full w-5 h-5"
                                 />
 
                                 <div className="z-10 w-[150px] bg-white right-[-10px] shadow-[0_1px_20px_0_rgb(0_0_0_/_20%)] absolute top-[calc(100%_+_10px)] animate-[fadeIn_.2s_ease-in] hidden group-hover:block">
                                     <ul className="p-3">
-                                        <a>
+                                        <span>
                                             <li className="hover:text-primary-color pb-1">
                                                 Tài khoản
                                             </li>
-                                        </a>
+                                        </span>
 
                                         <Link to="/change-password">
                                             <li className="hover:text-primary-color pb-1">
@@ -145,7 +145,7 @@ const Header = () => {
                                             </li>
                                         </Link>
 
-                                        <a
+                                        <span
                                             onClick={() => {
                                                 handleLogout();
                                             }}
@@ -153,7 +153,7 @@ const Header = () => {
                                             <li className="hover:text-primary-color  pt-2 border-t-2 border-t-primary-color border-solid">
                                                 Đăng xuất
                                             </li>
-                                        </a>
+                                        </span>
                                     </ul>
 
                                     <div className="absolute border-[20px]  border-b-white border-t-transparent border-l-transparent border-r-transparent top-[-30px] right-0 border-solid"></div>
@@ -167,12 +167,13 @@ const Header = () => {
             <div className="grids wide mobile:hidden tablet:hidden">
                 <div className="flex h-24 justify-between items-center">
                     <div>
-                        <a>
+                        <span>
                             <img
+                                alt="none"
                                 className="border-2 border-solid border-pribg-primary-color h-[60px] object-contain"
                                 src="https://via.placeholder.com/50"
                             />
-                        </a>
+                        </span>
                     </div>
                     <div>
                         <select
@@ -203,9 +204,9 @@ const Header = () => {
                     <div>
                         <div className="flex gap-4">
                             <div>
-                                <a href="tel:123456">
+                                <span>
                                     <i className="translate-y-[7px] text-[42px] text-primary-color fas fa-mobile-" />
-                                </a>
+                                </span>
                             </div>
                             <div>
                                 <span className="block">Hotline đặt hàng</span>
