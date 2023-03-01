@@ -3,7 +3,8 @@ import React, { useEffect, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { selectCount } from "../../features/counter/counterSlice";
 import { useSelector } from "react-redux";
-
+import { decrement } from "../../features/counter/counterSlice";
+import { useDispatch } from "react-redux";
 const activeClass = ({ isActive }) => {
     return isActive
         ? `bg-primary-color hover:cursor-pointer p-2 text-white`
@@ -12,6 +13,22 @@ const activeClass = ({ isActive }) => {
 
 const Navbar = () => {
     const [listCart, setListCart] = useState([]);
+    const dispatch=useDispatch()
+    const handleDelete=(idProduct)=>(
+      axios
+          .delete(`http://127.0.0.1:8000/api/cart/${idProduct}`, {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+            },
+          })
+          .then((res) => {
+            dispatch(decrement())
+            console.log(res);
+          })
+          .catch((err) => {
+            console.log(err);
+          })
+    )
     useEffect(() => {
         axios
           .get("http://127.0.0.1:8000/api/cart", {
@@ -109,11 +126,13 @@ const Navbar = () => {
                           <span className="text-[14px] text-[#757575] font-[300]">
                             Phân loại: VIP
                           </span>
-                          <a onclick="app.removeItemCart(event)">
-                            <span className="hover:text-primary-color text-[14px] text-[#757575]">
+                          
+                            <span onClick={() => {
+                        handleDelete(item.product_id);
+                      }} className="hover:text-primary-color text-[14px] text-[#757575]">
                               Xoá
                             </span>
-                          </a>
+                          
                         </div>
                       </div>
                     </li>
