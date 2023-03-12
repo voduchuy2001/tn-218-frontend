@@ -1,6 +1,32 @@
-import React from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
 const Checkout = () => {
+    const [list, setList] = useState(JSON.parse(localStorage.getItem("listCost")))
+    const [info, setInfo] = useState([])
+    useEffect(()=>{
+        axios.get("http://127.0.0.1:8000/api/auth/user-profile",{
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+            },
+        }).then((res)=>{setInfo(res.data);
+            setList(list.map(item => {
+                const { id, ...rest } = item; // destructuring to take out the key "id"
+                return { product_id: id, ...rest }; // returning a new object with the updated key name
+              })
+            )
+        }).catch((err)=>{console.log(err)})
+    },[])
+    const handleSubmit = ()=>{
+        axios.post("http://127.0.0.1:8000/api/orders",{
+            "user_id":info.id,
+            "items":list
+        },{
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("access_token")}`,
+            },
+        }).then((res)=>console.log(res)).catch((err)=>console.log(err))
+    }
     return (
         <div className="bg-gradient-to-tl from-white to-blue-100 p-5">
             <div className="grids wide min-h-screen">
@@ -8,10 +34,10 @@ const Checkout = () => {
                     <div className="col l-12 md-12 c-12">
                         <div className="w-full h-[100px] flex items-center justify-center flex-col bg-blue-400">
                             <span className="text-black font-semibold text-[16px]">
-                                TỔNG TIỀN: 10.00000.0000 đ
+                                TỔNG TIỀN: {localStorage.getItem("totalCost")} USD
                             </span>
                             <span className="text-black uppercase font-semibold text-[16px]">
-                                Số lượng sản phẩm: 10
+                                Số lượng sản phẩm: {list.length}
                             </span>
                         </div>
                     </div>
@@ -40,6 +66,7 @@ const Checkout = () => {
                                     name="fullname"
                                     className="focus:outline-none focus:border-[1px] focus:border-solid focus:border-primary-color col l-8 md-12 c-12 w-full bg-blue-100 p-1"
                                     id="fullname"
+                                    value={info.name}
                                 />
                                 <span className="error-message col l-o-4 text-red-600" />
                             </div>
@@ -56,6 +83,7 @@ const Checkout = () => {
                                     name="email"
                                     className="focus:outline-none focus:border-[1px] focus:border-solid focus:border-primary-color col l-8 md-12 c-12 w-full bg-blue-100 p-1"
                                     id="email"
+                                    value={info.email}
                                 />
                                 <span className="error-message col l-o-4 text-red-600" />
                             </div>
@@ -117,10 +145,10 @@ const Checkout = () => {
                                 </div>
                             </div>
                             <button
-                                className="button btnCheckout uppercase btn-disabled w-full"
+                                className="button btnCheckout uppercase w-full btn-disabled" onClick={()=>{handleSubmit()}} 
                                 disabled
                             >
-                                Vui lòng cập nhật đầy đủ thông tin
+                                Vui Lòng Nhập Đầy Đủ Thông Tin
                             </button>
                             {/* Btn khi đang submit */}
                             <button
@@ -152,123 +180,32 @@ const Checkout = () => {
                                 Đang đặt hàng...
                             </button>
                         </form>
+                        
                     </div>
                     <div className="col l-6 md-12 c-12 tablet:mt-5 mobile:mt-5">
                         <div className="p-5 shadow-lg h-[460px] overflow-auto">
-                            <div className="last:border-0 p-2 my-2 flex items-center justify-between border-b-[1px] border-solid border-[#aaa]">
-                                <img
-                                    className=" shadow-md p-2 w-[60px] h-[60px]"
-                                    src="https://cdn2.cellphones.com.vn/358x/media/catalog/product/i/p/iphone_13-_pro-4_2.jpg"
-                                    alt
-                                />
-                                <div>
-                                    <h4 className="font-semibold">
-                                        iPhone 13 Promax - Hồng 256GB
-                                    </h4>
-                                    <span>10.0000.0000 đ</span>
-                                </div>
-                                <div>
-                                    <span className="text-[12px]">x&nbsp;</span>
-                                    <span className="font-semibold text-[16px]">
-                                        1
-                                    </span>
-                                </div>
-                            </div>
-                            <div className="last:border-0 p-2 my-2 flex items-center justify-between border-b-[1px] border-solid border-[#aaa]">
-                                <img
-                                    className=" shadow-md p-2 w-[60px] h-[60px]"
-                                    src="https://cdn2.cellphones.com.vn/358x/media/catalog/product/i/p/iphone_13-_pro-4_2.jpg"
-                                    alt
-                                />
-                                <div>
-                                    <h4 className="font-semibold">
-                                        iPhone 13 Promax - Hồng 256GB
-                                    </h4>
-                                    <span>10.0000.0000 đ</span>
-                                </div>
-                                <div>
-                                    <span className="text-[12px]">x&nbsp;</span>
-                                    <span className="font-semibold text-[16px]">
-                                        1
-                                    </span>
-                                </div>
-                            </div>
-                            <div className="last:border-0 p-2 my-2 flex items-center justify-between border-b-[1px] border-solid border-[#aaa]">
-                                <img
-                                    className=" shadow-md p-2 w-[60px] h-[60px]"
-                                    src="https://cdn2.cellphones.com.vn/358x/media/catalog/product/i/p/iphone_13-_pro-4_2.jpg"
-                                    alt
-                                />
-                                <div>
-                                    <h4 className="font-semibold">
-                                        iPhone 13 Promax - Hồng 256GB
-                                    </h4>
-                                    <span>10.0000.0000 đ</span>
-                                </div>
-                                <div>
-                                    <span className="text-[12px]">x&nbsp;</span>
-                                    <span className="font-semibold text-[16px]">
-                                        1
-                                    </span>
-                                </div>
-                            </div>
-                            <div className="last:border-0 p-2 my-2 flex items-center justify-between border-b-[1px] border-solid border-[#aaa]">
-                                <img
-                                    className=" shadow-md p-2 w-[60px] h-[60px]"
-                                    src="https://cdn2.cellphones.com.vn/358x/media/catalog/product/i/p/iphone_13-_pro-4_2.jpg"
-                                    alt
-                                />
-                                <div>
-                                    <h4 className="font-semibold">
-                                        iPhone 13 Promax - Hồng 256GB
-                                    </h4>
-                                    <span>10.0000.0000 đ</span>
-                                </div>
-                                <div>
-                                    <span className="text-[12px]">x&nbsp;</span>
-                                    <span className="font-semibold text-[16px]">
-                                        1
-                                    </span>
-                                </div>
-                            </div>
-                            <div className="last:border-0 p-2 my-2 flex items-center justify-between border-b-[1px] border-solid border-[#aaa]">
-                                <img
-                                    className=" shadow-md p-2 w-[60px] h-[60px]"
-                                    src="https://cdn2.cellphones.com.vn/358x/media/catalog/product/i/p/iphone_13-_pro-4_2.jpg"
-                                    alt
-                                />
-                                <div>
-                                    <h4 className="font-semibold">
-                                        iPhone 13 Promax - Hồng 256GB
-                                    </h4>
-                                    <span>10.0000.0000 đ</span>
-                                </div>
-                                <div>
-                                    <span className="text-[12px]">x&nbsp;</span>
-                                    <span className="font-semibold text-[16px]">
-                                        1
-                                    </span>
-                                </div>
-                            </div>
-                            <div className="last:border-0 p-2 my-2 flex items-center justify-between border-b-[1px] border-solid border-[#aaa]">
-                                <img
-                                    className=" shadow-md p-2 w-[60px] h-[60px]"
-                                    src="https://cdn2.cellphones.com.vn/358x/media/catalog/product/i/p/iphone_13-_pro-4_2.jpg"
-                                    alt
-                                />
-                                <div>
-                                    <h4 className="font-semibold">
-                                        iPhone 13 Promax - Hồng 256GB
-                                    </h4>
-                                    <span>10.0000.0000 đ</span>
-                                </div>
-                                <div>
-                                    <span className="text-[12px]">x&nbsp;</span>
-                                    <span className="font-semibold text-[16px]">
-                                        1
-                                    </span>
-                                </div>
-                            </div>
+                            
+                            {list.map((item)=>(
+                                 <div className="last:border-0 p-2 my-2 flex items-center justify-between border-b-[1px] border-solid border-[#aaa]">
+                                 <img
+                                     className=" shadow-md p-2 w-[60px] h-[60px]"
+                                     src={item.image}
+                                     alt
+                                 />
+                                 <div>
+                                     <h4 className="font-semibold">
+                                         {item.name}
+                                     </h4>
+                                     <span>{item.price} USD</span>
+                                 </div>
+                                 <div>
+                                     <span className="text-[12px]">x&nbsp;</span>
+                                     <span className="font-semibold text-[16px]">
+                                         {item.quantity}
+                                     </span>
+                                 </div>
+                             </div>
+                            ))}
                         </div>
                     </div>
                 </div>

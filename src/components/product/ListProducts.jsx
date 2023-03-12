@@ -1,9 +1,11 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { increment } from "../../features/counter/counterSlice";
 import { useDispatch } from "react-redux";
 
 const ListProduct = () => {
+  const nav=useNavigate()
   const dispatch = useDispatch();
   const [listProduct, setListProduct] = useState([]);
   //Pagination
@@ -30,6 +32,7 @@ const ListProduct = () => {
       })
       .catch((err) => {
         console.log(err);
+        nav("/login")
       });
   };
   useEffect(() => {

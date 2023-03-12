@@ -8,6 +8,7 @@ import {
 } from "../../features/counter/counterSlice";
 
 const Cart = () => {
+  const [listCheckout, setListCheckout] = useState([]);
   const [listCart, setListCart] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [check, setCheck] = useState(false);
@@ -28,12 +29,12 @@ const Cart = () => {
         }
       )
       .then((res) => {
-        dispatch(increment());
         console.log(res);
       })
       .catch((err) => {
         console.log(err);
       });
+    dispatch(increment());
   };
   const handleMinus = (item, qty) => {
     axios
@@ -71,13 +72,24 @@ const Cart = () => {
         console.log(err);
       });
   const handleCount = (value, item) => {
+    var updatedList = [listCheckout];
     if (value.target.checked) {
       setTotalPrice(totalPrice + item.product.price * item.quantity);
+      var temp = item.product
+      temp.quantity=item.quantity
+      updatedList = [...listCheckout, temp];
+      console.log(temp);
+      setListCheckout(updatedList);
+      console.log(item.product);
       setCheck(true);
       console.log("checked");
     } else {
       setTotalPrice(totalPrice - item.product.price * item.quantity);
-      console.log("not checked");
+
+      const index = listCheckout.findIndex(
+        (obj) => obj.name === item.product.name
+      );
+      listCheckout.splice(index, 1);
     }
   };
   useEffect(() => {
@@ -208,7 +220,13 @@ const Cart = () => {
                 </span>
               </div>
               <div className="m-2">
-                <button className="block w-full uppercase text-[16px] p-2 mb-3 font-bold bg-primary-color text-white">
+                <button
+                  onClick={() => {
+                    localStorage.setItem("totalCost", totalPrice);
+                    localStorage.setItem("listCost",JSON.stringify(listCheckout));
+                  }}
+                  className="block w-full uppercase text-[16px] p-2 mb-3 font-bold bg-primary-color text-white"
+                >
                   Tiến hành đặt hàng
                 </button>
                 <button className="block w-full uppercase text-[16px] p-2 text-blue-500 hover:bg-blue-600 hover:text-white font-bold border-2 border-solid border-primary-color">
