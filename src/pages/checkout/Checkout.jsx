@@ -2,19 +2,49 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 const Checkout = () => {
-    const [list, setList] = useState(JSON.parse(localStorage.getItem("listCost")))
-    const [info, setInfo] = useState([])
-    useEffect(()=>{
-        axios.get("http://127.0.0.1:8000/api/auth/user-profile",{
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem("access_token")}`,
-            },
-        }).then((res)=>{setInfo(res.data);
-            setList(list.map(item => {
-                const { id, ...rest } = item; // destructuring to take out the key "id"
-                return { product_id: id, ...rest }; // returning a new object with the updated key name
-              })
+    const [list, setList] = useState(
+        JSON.parse(localStorage.getItem("listCost"))
+    );
+    const [info, setInfo] = useState([]);
+    useEffect(() => {
+        axios
+            .get("http://127.0.0.1:8000/api/auth/user-profile", {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem(
+                        "access_token"
+                    )}`,
+                },
+            })
+            .then((res) => {
+                setInfo(res.data);
+                setList(
+                    list.map((item) => {
+                        const { id, ...rest } = item; // destructuring to take out the key "id"
+                        return { product_id: id, ...rest }; // returning a new object with the updated key name
+                    })
+                );
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }, []);
+    const handleSubmit = () => {
+        axios
+            .post(
+                "http://127.0.0.1:8000/api/orders",
+                {
+                    user_id: info.id,
+                    items: list,
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${localStorage.getItem(
+                            "access_token"
+                        )}`,
+                    },
+                }
             )
+<<<<<<< HEAD
         }).catch((err)=>{console.log(err)})
     },[])
     const handleSubmit = ()=>{
@@ -32,6 +62,11 @@ const Checkout = () => {
             },
         }).then((res)=>console.log(res)).catch((err)=>console.log(err))
     }
+=======
+            .then((res) => console.log(res))
+            .catch((err) => console.log(err));
+    };
+>>>>>>> 0a21d3199e47b5c060ba807b8be3f191ce597ea6
     return (
         <div className="bg-gradient-to-tl from-white to-blue-100 p-5">
             <div className="grids wide min-h-screen">
@@ -39,7 +74,8 @@ const Checkout = () => {
                     <div className="col l-12 md-12 c-12">
                         <div className="w-full h-[100px] flex items-center justify-center flex-col bg-blue-400">
                             <span className="text-black font-semibold text-[16px]">
-                                TỔNG TIỀN: {localStorage.getItem("totalCost")} USD
+                                TỔNG TIỀN: {localStorage.getItem("totalCost")}{" "}
+                                USD
                             </span>
                             <span className="text-black uppercase font-semibold text-[16px]">
                                 Số lượng sản phẩm: {list.length}
@@ -150,9 +186,12 @@ const Checkout = () => {
                                 </div>
                             </div>
                             <button
-                                className="button btnCheckout uppercase w-full btn-disabled" onClick={()=>{handleSubmit()}} 
-                                disabled
+                                className="button btnCheckout uppercase w-full btn-primary"
+                                onClick={() => {
+                                    handleSubmit();
+                                }}
                             >
+<<<<<<< HEAD
                                 Vui Lòng Nhập Đầy Đủ Thông Tin
                             </button>
                             <PayPalScriptProvider options={{ "client-id": "AUPn7fmPReFUAgAg6qkRsyLk3xLIbRw9Oo0Nb1sbvk5UfAsHjFwoZMDn6ck0zgJCA52licZt-d5reySi" }}>
@@ -204,33 +243,36 @@ const Checkout = () => {
                                     />
                                 </svg>
                                 Đang đặt hàng...
+=======
+                                Đặt hàng
+>>>>>>> 0a21d3199e47b5c060ba807b8be3f191ce597ea6
                             </button>
                         </form>
-                        
                     </div>
                     <div className="col l-6 md-12 c-12 tablet:mt-5 mobile:mt-5">
                         <div className="p-5 shadow-lg h-[460px] overflow-auto">
-                            
-                            {list.map((item)=>(
-                                 <div className="last:border-0 p-2 my-2 flex items-center justify-between border-b-[1px] border-solid border-[#aaa]">
-                                 <img
-                                     className=" shadow-md p-2 w-[60px] h-[60px]"
-                                     src={item.image}
-                                     alt
-                                 />
-                                 <div>
-                                     <h4 className="font-semibold">
-                                         {item.name}
-                                     </h4>
-                                     <span>{item.price} USD</span>
-                                 </div>
-                                 <div>
-                                     <span className="text-[12px]">x&nbsp;</span>
-                                     <span className="font-semibold text-[16px]">
-                                         {item.quantity}
-                                     </span>
-                                 </div>
-                             </div>
+                            {list.map((item) => (
+                                <div className="last:border-0 p-2 my-2 flex items-center justify-between border-b-[1px] border-solid border-[#aaa]">
+                                    <img
+                                        className=" shadow-md p-2 w-[60px] h-[60px]"
+                                        src={item.image}
+                                        alt
+                                    />
+                                    <div>
+                                        <h4 className="font-semibold">
+                                            {item.name}
+                                        </h4>
+                                        <span>{item.price} USD</span>
+                                    </div>
+                                    <div>
+                                        <span className="text-[12px]">
+                                            x&nbsp;
+                                        </span>
+                                        <span className="font-semibold text-[16px]">
+                                            {item.quantity}
+                                        </span>
+                                    </div>
+                                </div>
                             ))}
                         </div>
                     </div>

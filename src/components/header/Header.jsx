@@ -1,11 +1,16 @@
 import axios from "axios";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
+<<<<<<< HEAD
 import {
     increment
   } from "../../features/counter/counterSlice"
 import {useDispatch } from 'react-redux';
 
+=======
+import { increment } from "../../features/counter/counterSlice";
+>>>>>>> 0a21d3199e47b5c060ba807b8be3f191ce597ea6
 const Header = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -31,9 +36,8 @@ const Header = () => {
             .then((res) => {
                 console.log(res);
                 localStorage.clear();
-                dispatch(increment())
+                dispatch(increment());
                 navigate("/login");
-
             })
             .catch((err) => {
                 console.log(err);
@@ -179,7 +183,7 @@ const Header = () => {
                             <img
                                 alt="none"
                                 className="border-2 border-solid border-pribg-primary-color h-[60px] object-contain"
-                                src="https://via.placeholder.com/50"
+                                src="https://w7.pngwing.com/pngs/713/936/png-transparent-online-shopping-shopping-cart-logo-e-commerce-market-blue-angle-company.png"
                             />
                         </span>
                     </div>
@@ -208,7 +212,7 @@ const Header = () => {
                         {/*remove space
                          */}
                         <button className="rounded-r-lg w-11 h-11 bg-primary-color hover:opacity-80">
-                            <i className="text-[20px] fas fa-search" />
+                            <i className="text-[20px] fas fa-search text-white" />
                         </button>
                     </div>
                     <div>
