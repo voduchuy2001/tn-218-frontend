@@ -1,6 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 const Checkout = () => {
     const [list, setList] = useState(JSON.parse(localStorage.getItem("listCost")))
     const [info, setInfo] = useState([])
@@ -20,7 +20,12 @@ const Checkout = () => {
     const handleSubmit = ()=>{
         axios.post("http://127.0.0.1:8000/api/orders",{
             "user_id":info.id,
-            "items":list
+            "items":list,
+            "payment_method":"paypal",
+            "payment_status":"null",
+            "shipping_method":"null",
+            "shipping_address":"null"
+
         },{
             headers: {
                 Authorization: `Bearer ${localStorage.getItem("access_token")}`,
@@ -150,6 +155,27 @@ const Checkout = () => {
                             >
                                 Vui Lòng Nhập Đầy Đủ Thông Tin
                             </button>
+                            <PayPalScriptProvider options={{ "client-id": "AUPn7fmPReFUAgAg6qkRsyLk3xLIbRw9Oo0Nb1sbvk5UfAsHjFwoZMDn6ck0zgJCA52licZt-d5reySi" }}>
+            <PayPalButtons
+                createOrder={(data, actions) => {
+                    return actions.order.create({
+                        purchase_units: [
+                            {
+                                amount: {
+                                    value: localStorage.getItem("totalCost"),
+                                },
+                            },
+                        ],
+                    });
+                }}
+                onApprove={(data, actions) => {
+                    return actions.order.capture().then((details) => {
+                        const name = details.payer.name.given_name;
+                        alert(`Transaction completed by ${name}`);
+                    });
+                }}
+            />
+        </PayPalScriptProvider>
                             {/* Btn khi đang submit */}
                             <button
                                 type="button"

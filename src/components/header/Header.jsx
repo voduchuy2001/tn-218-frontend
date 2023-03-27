@@ -4,7 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import {
     increment
   } from "../../features/counter/counterSlice"
-  import {useDispatch } from 'react-redux';
+import {useDispatch } from 'react-redux';
+
 const Header = () => {
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -18,6 +19,7 @@ const Header = () => {
     };
 
     const [isMenuShow, setIsMenuShow] = useState(false);
+   
 
     const handleLogout = () => {
         axios
@@ -200,7 +202,9 @@ const Header = () => {
                                 placeholder="Nhập sản phẩm bạn cần tìm..."
                                 className="focus-visible:shadow-[0_0_5px_#ccc] focus-visible:outline-none p-4 border h-11 w-96 text-[16px]"
                             />
+                            
                         </div>
+                        
                         {/*remove space
                          */}
                         <button className="rounded-r-lg w-11 h-11 bg-primary-color hover:opacity-80">
